@@ -1,21 +1,12 @@
 pipeline {
-    agent {
-        label 'docker' // Ensure the agent label is appropriate for your Jenkins setup
+  agent {
+    docker { image 'node:16-alpine' }
+  }
+  stages {
+    stage('Test') {
+      steps {
+        sh 'node --version'
+      }
     }
-    stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'node:16-alpine'
-                    args '-v /root/.npm:/root/.npm' // Optional: Use args to pass additional Docker options
-                }
-            }
-            steps {
-                script {
-                    echo 'Building in Docker...'
-                    sh 'node --version'
-                }
-            }
-        }
-    }
+  }
 }
