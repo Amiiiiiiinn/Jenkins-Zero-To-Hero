@@ -1,0 +1,15 @@
+pipeline {
+  agent {
+    docker {
+      image 'grafana/grafana:latest'
+      // You can add 'args' if needed, e.g., to mount volumes
+    }
+  }
+  stages {
+    stage('Test') {
+      steps {
+        sh 'node --version'
+      }
+    }
+  }
+}
